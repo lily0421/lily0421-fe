@@ -4,7 +4,6 @@ import type { NextPage } from 'next';
 import React from 'react';
 import styled from 'styled-components';
 
-import products from '../api/data/products.json';
 import ProductList from '../components/ProductList';
 import Pagination from '../components/Pagination';
 
@@ -23,7 +22,7 @@ const HomePage: NextPage = () => {
         </Link>
       </Header>
       <Container>
-        <ProductList products={products.slice(0, 10)} />
+        <ProductList />
         <Pagination />
       </Container>
     </>
