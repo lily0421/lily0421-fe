@@ -6,14 +6,12 @@ const usePagination = ({ totalItems }: { totalItems?: number }) => {
   const router = useRouter();
   const { page } = router.query;
   const PAGE = page === undefined ? DEFAULT_PAGE : Number(page);
-  // const [currentPage, setCurrentPage] = useState(PAGE);
   const totalPages = totalItems && Math.ceil(totalItems / DEFAULT_SIZE);
   const isFirstPage = PAGE === 1;
   const isLastPage = PAGE === totalPages;
 
   const onChangePage = (page: SetStateAction<number>) => {
     if (totalPages && page >= 1 && page <= totalPages) {
-      // setCurrentPage(page);
       router.push(`?page=${page}`);
     }
   };
