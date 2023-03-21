@@ -1,20 +1,31 @@
 import { useRouter } from 'next/router';
 import type { NextPage } from 'next';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import ProductList from '../components/ProductList';
 import Pagination from '../components/Pagination';
+import { useGetProductList } from '../services/queries/product';
+import usePagination from '../utilities/hooks/usePagination';
 
 const HomePage: NextPage = () => {
-  const router = useRouter();
-  const { page } = router.query;
+  const { data: productListData } = useGetProductList();
+  const data = productListData?.data.data;
+
+  const { totalPages, onChangePage, isFirstPage, isLastPage } = usePagination({
+    totalItems: data?.totalCount,
+  });
 
   return (
     <>
       <Container>
         <ProductList />
-        <Pagination />
+        <Pagination
+          totalPages={totalPages}
+          onChangePage={onChangePage}
+          isFirstPage={isFirstPage}
+          isLastPage={isLastPage}
+        />
       </Container>
     </>
   );
