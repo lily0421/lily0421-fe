@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { NextPage } from 'next';
 import React from 'react';
 import styled from 'styled-components';
+import HeaderLogin from './HeaderLogin';
 
 const Header: NextPage = () => {
   return (
@@ -9,9 +10,7 @@ const Header: NextPage = () => {
       <Link href='/'>
         <Title>HAUS</Title>
       </Link>
-      <Link href='/login'>
-        <p>login</p>
-      </Link>
+      <HeaderLogin />
     </Container>
   );
 };
@@ -27,4 +26,5 @@ const Container = styled.div`
 
 const Title = styled.a`
   font-size: 48px;
+  cursor: pointer;
 `;

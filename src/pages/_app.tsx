@@ -6,6 +6,8 @@ import setupMSW from '../api/setup';
 import Header from '../components/common/Header';
 import GlobalStyle from '../styles/GlobalStyle';
 
+import { RecoilRoot } from 'recoil';
+
 setupMSW();
 
 const queryClient = new QueryClient({
@@ -18,13 +20,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <GlobalStyle />
-      <QueryClientProvider client={queryClient}>
-        <Background />
-        <Content>
-          <Header />
-          <Component {...pageProps} />
-        </Content>
-      </QueryClientProvider>
+      <RecoilRoot>
+        <QueryClientProvider client={queryClient}>
+          <Background />
+          <Content>
+            <Header />
+            <Component {...pageProps} />
+          </Content>
+        </QueryClientProvider>
+      </RecoilRoot>
     </>
   );
 }
