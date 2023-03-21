@@ -4,13 +4,37 @@ import { getProducts, getProductsById } from '../../rest/products';
 
 export function useGetProductList() {
   const router = useRouter();
-  const { page } = router.query;
+  let page: string | undefined = Array.isArray(router.query.page)
+    ? router.query.page[0]
+    : router.query.page;
+  page = page ? page : '1';
 
-  return useQuery(['get', 'productsList'], async () => await getProducts());
+  return useQuery(['get', 'productsList', page], async () => await getProducts({ page }), {
+    onError: (err: any) => {
+      const { alertMessage } = err?.response ?? {};
+      if (alertMessage.message) {
+        alert(alertMessage.message);
+        router.push('/404');
+      } else {
+        throw err;
+      }
+    },
+  });
 }
 
 export function useGetProductsById(id?: string) {
+  const router = useRouter();
+
   return useQuery(['get', 'products', id], async () => await getProductsById({ id: id ?? '' }), {
     enabled: !!id,
+    onError: (err: any) => {
+      const { alertMessage } = err?.response ?? {};
+      if (alertMessage.message) {
+        alert(alertMessage.message);
+        router.push('/404');
+      } else {
+        throw err;
+      }
+    },
   });
 }

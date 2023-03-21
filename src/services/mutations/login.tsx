@@ -28,7 +28,11 @@ export function useOnLogin() {
         router.push('/');
       } catch (err: any) {
         const { alertMessage } = err?.response ?? {};
-        alert(alertMessage.message);
+        if (alertMessage) {
+          alert(alertMessage.message);
+        } else {
+          throw err;
+        }
       }
     },
     onError: (e: any) => {
