@@ -1,19 +1,34 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
 import styled from 'styled-components';
 
 import setupMSW from '../api/setup';
+import Header from '../components/common/Header';
 import GlobalStyle from '../styles/GlobalStyle';
 
+import { RecoilRoot } from 'recoil';
+
 setupMSW();
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: { refetchOnWindowFocus: false, retry: 0 },
+  },
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <GlobalStyle />
-      <Background />
-      <Content>
-        <Component {...pageProps} />
-      </Content>
+      <RecoilRoot>
+        <QueryClientProvider client={queryClient}>
+          <Background />
+          <Content>
+            <Header />
+            <Component {...pageProps} />
+          </Content>
+        </QueryClientProvider>
+      </RecoilRoot>
     </>
   );
 }
