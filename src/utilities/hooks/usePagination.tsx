@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useState, SetStateAction } from 'react';
+import { SetStateAction } from 'react';
 import { DEFAULT_PAGE, DEFAULT_SIZE } from '../../constants/common';
 
 const usePagination = ({ totalItems }: { totalItems?: number }) => {
