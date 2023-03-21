@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { getProducts, getProductsBtyd } from '../../rest/products';
+import { getProducts, getProductsById } from '../../rest/products';
 
 export function useGetProductList() {
   const router = useRouter();
@@ -10,7 +10,7 @@ export function useGetProductList() {
 }
 
 export function useGetProductsById(id?: string) {
-  return useQuery(['get', 'products', id], async () => await getProductsBtyd({ id: id ?? '' }), {
+  return useQuery(['get', 'products', id], async () => await getProductsById({ id: id ?? '' }), {
     enabled: !!id,
   });
 }

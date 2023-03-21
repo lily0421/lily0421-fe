@@ -20,6 +20,6 @@ export function getProducts({
   );
 }
 
-export function getProductsBtyd({ id }: { id: string }) {
+export function getProductsById({ id }: { id: string }) {
   return sixShopAPI.get<SixShopResponseType<{ product: Product }>>(`/products/${id}`);
 }
