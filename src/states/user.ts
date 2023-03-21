@@ -2,11 +2,11 @@ import { atom } from 'recoil';
 import { UserData } from '../types/user';
 
 export const makeAnnonymousUser = () => ({
-  id: 'sixshop_-1',
+  id: '',
   name: '',
 });
 
-export const User = atom<UserData>({
-  key: 'user',
+export const userState = atom<UserData>({
+  key: 'userState',
   default: makeAnnonymousUser(),
 });

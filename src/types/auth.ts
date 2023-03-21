@@ -1,6 +1,6 @@
-import { User } from './user';
+import { UserData } from './user';
 
 export type Auth = {
   accessToken: string;
-  user: User;
+  user: UserData;
 };

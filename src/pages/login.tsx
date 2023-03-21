@@ -1,8 +1,12 @@
 import type { NextPage } from 'next';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useOnLogin } from '../services/mutations/login';
+import { RecoilState, useRecoilValue } from 'recoil';
+import { userState } from '../states/user';
+import { UserData } from '../types/user';
+import { useRouter } from 'next/router';
 
 const LoginPage: NextPage = () => {
   const {
@@ -14,6 +18,14 @@ const LoginPage: NextPage = () => {
     password: string;
   }>({ mode: 'onTouched' });
   const onLogin = useOnLogin();
+  const user = useRecoilValue(userState);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user.id) {
+      router.push('/');
+    }
+  }, [user]);
 
   const onSubmit = async (data: any) => {
     onLogin.mutate(data);
@@ -128,3 +140,6 @@ const LoginButton = styled.button`
     background-color: #e2e2ea;
   }
 `;
+function useRecoilState(userState: RecoilState<UserData>): [any, any] {
+  throw new Error('Function not implemented.');
+}
